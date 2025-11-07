@@ -64,9 +64,8 @@ export default function Home() {
         </div>
 
         <div
-          className={`relative z-10 w-[90%] md:w-[70%] lg:w-[60%] transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          className={`relative z-10 w-[90%] md:w-[70%] lg:w-[60%] transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
         >
           <div className="text-center mb-8">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight">
@@ -83,11 +82,10 @@ export default function Home() {
                 return (
                   <div
                     key={index}
-                    className={`flex items-center gap-2 absolute transition-all duration-500 ${
-                      currentFeature === index
-                        ? "opacity-100 transform scale-100"
-                        : "opacity-0 transform scale-95"
-                    }`}
+                    className={`flex items-center gap-2 absolute transition-all duration-500 ${currentFeature === index
+                      ? "opacity-100 transform scale-100"
+                      : "opacity-0 transform scale-95"
+                      }`}
                   >
                     <Icon className={`w-6 h-6 ${feature.color}`} />
                     <span className={`text-lg font-semibold ${feature.color}`}>
@@ -130,7 +128,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+          <div className="flex justify-center items-center mb-12">
             <Button
               variant="prepsmash_button"
               className="relative bg-gradient-to-r from-purple-600 via-purple-700 to-blue-600 hover:from-purple-700 hover:via-purple-800 hover:to-blue-700 text-white px-10 py-6 text-lg font-semibold rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 group overflow-hidden"
@@ -140,15 +138,6 @@ export default function Home() {
               <span className="relative flex items-center">
                 Get Started Free
                 <ChevronsRight className="ml-2 w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
-              </span>
-            </Button>
-            <Button
-              variant="outline"
-              className="relative border-2 border-purple-300 text-purple-700 hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 px-10 py-6 text-lg font-semibold rounded-2xl hover:shadow-lg transform hover:scale-105 transition-all duration-300 group hover:border-purple-400"
-            >
-              <span className="flex items-center">
-                Watch Demo
-                <div className="ml-2 w-3 h-3 bg-purple-500 rounded-full group-hover:animate-ping"></div>
               </span>
             </Button>
           </div>
