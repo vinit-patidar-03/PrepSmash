@@ -241,7 +241,7 @@ const FeedbackPage = async ({
                 {/* Interview Info Banner */}
                 <Card className="mb-8 border-0 shadow-xl overflow-hidden py-0">
                     <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 p-8 text-white">
-                        <div className="flex items-start justify-between">
+                        <div className="flex flex-col sm:flex-row gap-3 items-start justify-between">
                             <div className="space-y-4">
                                 <div className="flex items-center space-x-3">
                                     <Building className="w-6 h-6 text-slate-300" />
