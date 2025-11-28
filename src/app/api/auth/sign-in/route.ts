@@ -2,7 +2,7 @@ import {USER} from "@/models";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import { connectDB } from "@/lib/db";
-import { generateAccessToken, generateRefreshToken, setCookies } from "@/lib/session";
+import { generateAccessToken, generateRefreshToken} from "@/lib/session";
 
 
 
@@ -31,10 +31,23 @@ export const POST = async (req: NextRequest) => {
         const accessToken = generateAccessToken(user._id);
         const refreshToken = generateRefreshToken(user._id);
 
-        await setCookies("accessToken", accessToken, 3600);
-        await setCookies("refreshToken", refreshToken, 604800);
+        const response = NextResponse.json({ success: true, data: user?._id }, { status: 200 });
+        response.cookies.set("accessToken", accessToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            maxAge: 3600,
+            path: "/",
+            sameSite: "lax"
+        });
 
-        return NextResponse.json({ success: true, data: user?._id }, { status: 200 });
+        response.cookies.set("refreshToken", refreshToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            maxAge: 604800,
+            path: "/",
+            sameSite: "lax"
+        });
+        return response;
 
     } catch (error) {
         console.error("Error logging in user:", error);
