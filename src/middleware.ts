@@ -32,6 +32,8 @@ export const config = {
     "/profile",
     "/playground/:path*",
     "/interview/feedback/:path*",
-    "/"
+    "/",
+    "/sign-in",
+    "/sign-up",
   ],
 };
