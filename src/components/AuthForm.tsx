@@ -79,14 +79,12 @@ const AuthForm = ({ type }: AuthFormProps) => {
       if (isSignIn) {
         const response = await apiRequest("/api/auth/sign-in", "POST", data);
         if (response.success) {
-          setIsLoading(false);
           router.push("/practice");
           toast.success("Sign In successful");
         }
       } else {
         const response = await apiRequest("/api/auth/sign-up", "POST", data);
         if (response.success) {
-          setIsLoading(false);
           router.push("/sign-in");
           toast.success("Account created successfully! Please sign in.");
         }
