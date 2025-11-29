@@ -1,8 +1,7 @@
 import { NextResponse, NextRequest } from 'next/server';
 
-const urls = ["/", "/sign-in", "/sign-up"];
-
-const protectedRoutes = ["/practice", "/browse", "/create", "/profile", "/playground/:path*", "/interview/feedback/:path*"];
+const publicRoutes = ["/", "/sign-in", "/sign-up"];
+const protectedRoutes = ["/practice", "/browse", "/create", "/profile"];
 
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get("accessToken")?.value;
@@ -11,11 +10,13 @@ export async function middleware(request: NextRequest) {
 
   console.log("Middleware check:", { pathname, token, rtoken });
 
-  if ((token || rtoken) && urls.includes(pathname)) {
+  const isAuthenticated = !!(token || rtoken);
+ 
+  if (isAuthenticated && publicRoutes.includes(pathname)) {
     return NextResponse.redirect(new URL("/practice", request.url));
   }
-
-  if (!token && !rtoken && protectedRoutes.includes(pathname)) {
+ 
+  if (!isAuthenticated && protectedRoutes.some(route => pathname.startsWith(route.replace("/:path*", "")))) {
     return NextResponse.redirect(new URL("/sign-in", request.url));
   }
 
@@ -24,8 +25,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/api/interviews/:path*",
-    "/api/auth/:path*",
     "/create",
     "/browse",
     "/practice",
