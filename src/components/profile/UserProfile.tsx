@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Interview } from '@/types/types';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { apiRequest, apiRequestWithFile } from '@/api/client-request';
 import { toast } from 'sonner';
 import ButtonWithLoading from '../ButtonWithLoading';
@@ -336,6 +337,7 @@ const UserInfoCard = ({
   user: UserData;
   onUserUpdate: (updatedUser: UserData) => void;
 }) => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogout = async () => {
@@ -344,7 +346,7 @@ const UserInfoCard = ({
       const response = await apiRequest('/api/auth/logout', 'POST');
       if (response?.success) {
         toast.success("logged out successfully");
-        window.location.href = '/'
+        router.push('/');
       }
     } catch (error) {
       toast.error('Logout failed');
