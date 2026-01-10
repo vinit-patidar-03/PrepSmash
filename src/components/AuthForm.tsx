@@ -79,7 +79,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
       if (isSignIn) {
         const response = await apiRequest("/api/auth/sign-in", "POST", data);
         if (response.success) {
-          router.push("/practice");
+          window.location.href = "/practice";
           toast.success("Sign In successful");
         }
       } else {
