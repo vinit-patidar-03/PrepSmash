@@ -27,7 +27,7 @@ export const config = {
   matcher: [
     "/create",
     "/browse",
-    "/practice",
+    // "/practice",
     "/profile",
     "/playground/:path*",
     "/interview/feedback/:path*",
