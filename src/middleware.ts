@@ -1,7 +1,6 @@
 import { NextResponse, NextRequest } from 'next/server';
 
 const publicRoutes = ["/", "/sign-in", "/sign-up"];
-const protectedRoutes = ["/practice", "/browse", "/create", "/profile"];
 
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get("accessToken")?.value;
@@ -11,12 +10,13 @@ export async function middleware(request: NextRequest) {
   console.log("Middleware check:", { pathname, token, rtoken });
 
   const isAuthenticated = !!(token || rtoken);
+  const isPublicRoute = publicRoutes.includes(pathname);
 
-  if (isAuthenticated && publicRoutes.includes(pathname)) {
+  if (isAuthenticated && isPublicRoute) {
     return NextResponse.redirect(new URL("/practice", request.url));
   }
 
-  if (!isAuthenticated && protectedRoutes.some(route => pathname.startsWith(route.replace("/:path*", "")))) {
+  if (!isAuthenticated && !isPublicRoute) {
     return NextResponse.redirect(new URL("/sign-in", request.url));
   }
 
