@@ -40,12 +40,16 @@ const interviewSchema = new mongoose.Schema<Interview>({
     description: {
         type: String,
         required: true,
+    },
+    isPersonal: {
+        type: Boolean,
+        default: false,
     }
 }, {
     timestamps: true,
 });
 
-interviewSchema.pre("deleteOne", { document: true, query: false }, async function(next) {
+interviewSchema.pre("deleteOne", { document: true, query: false }, async function (next) {
     await USER_BOOKMARKS.deleteMany({ interview: this._id });
     next();
 });

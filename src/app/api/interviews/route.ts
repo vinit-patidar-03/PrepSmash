@@ -1,6 +1,6 @@
 import { connectDB } from "@/lib/db";
 import { getUserId } from "@/lib/session";
-import {INTERVIEW_MODEL} from "@/models";
+import { INTERVIEW_MODEL } from "@/models";
 import { NextResponse } from "next/server";
 import mongoose from "mongoose";
 
@@ -16,8 +16,9 @@ export const GET = async () => {
     }
 
     await connectDB();
-    
+
     const interviews = await INTERVIEW_MODEL.aggregate([
+      { $match: { isPersonal: false } },
       {
         $lookup: {
           from: "userbookmarks",
@@ -44,11 +45,11 @@ export const GET = async () => {
       },
       { $sort: { createdAt: -1 } },
     ]);
-      
-      if (!interviews) {
-          return NextResponse.json({ error: "No interviews found" }, { status: 404 });
-      }
-        return NextResponse.json({ success: true, data: interviews }, { status: 200 });
+
+    if (!interviews) {
+      return NextResponse.json({ error: "No interviews found" }, { status: 404 });
+    }
+    return NextResponse.json({ success: true, data: interviews }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ success: false, error: error }, { status: 500 });
   }

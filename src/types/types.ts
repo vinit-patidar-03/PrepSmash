@@ -5,8 +5,8 @@ export type ChildProp = {
 }
 
 export type User = {
-    _id: string;
-    username: string;
+  _id: string;
+  username: string;
   email: string;
   profileImage?: string;
   vapiAPIKey?: string
@@ -50,10 +50,11 @@ export interface Interview {
   isBookmarked?: boolean;
   isCompleted?: boolean;
   isStarted?: boolean;
-  isFeedback?:boolean
+  isFeedback?: boolean
+  isPersonal?: boolean
 }
 
-export interface PracticeInterviews{
+export interface PracticeInterviews {
   interview: Interview;
   createdAt: Date;
   updatedAt: Date;
@@ -155,7 +156,7 @@ export interface EmptyStateProps {
   icon?: string;
 }
 
-export type Difficulty =  "Beginner" | "Intermediate" | "Advanced" | "Expert";
+export type Difficulty = "Beginner" | "Intermediate" | "Advanced" | "Expert";
 
 export interface GenerateQuestionsParams {
   company: string;
@@ -164,7 +165,7 @@ export interface GenerateQuestionsParams {
   technologies: string[];
   duration: number;
   description: string;
-  Resume?:File
+  Resume?: File
 }
 export interface GenerateDescriptionParams {
   company: string;

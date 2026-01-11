@@ -296,7 +296,7 @@ const InterviewForm = () => {
     form.append("description", formData.description);
     form.append("questions", JSON.stringify(formData.questions));
     if (formData.Resume) {
-      form.append("companyLogo", formData.Resume!);
+      form.append("Resume", formData.Resume!);
     }
     try {
       const response = await apiRequestWithFile(
@@ -309,7 +309,7 @@ const InterviewForm = () => {
         toast.success("Interview created successfully!");
         setFormData(INITIAL_FORM_DATA);
         setCurrentStep(1);
-        router.push('/browse')
+        router.push('/practice')
       } else {
         toast.error("Failed to create interview");
       }
