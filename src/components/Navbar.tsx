@@ -8,7 +8,7 @@ import { User } from "@/types/types";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Separator } from "./ui/separator";
 type NavbarProps = {
-  user: User
+  user: User | null
 }
 const Navbar = ({ user }: NavbarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

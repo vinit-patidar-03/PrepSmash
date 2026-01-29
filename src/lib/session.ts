@@ -13,18 +13,34 @@ export const generateRefreshToken = (userId: string) => {
 
 export const setCookies = async (key: string, value: string, maxAge: number) => {
     const cookieStore = await cookies();
-    cookieStore.set(key, value, {
+    const cookieOptions = {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
+        sameSite: "lax" as const,
         maxAge,
         path: "/",
+    };
+
+    console.log(`[COOKIE] Setting ${key} with options:`, {
+        secure: cookieOptions.secure,
+        sameSite: cookieOptions.sameSite,
+        maxAge: cookieOptions.maxAge
     });
+
+    cookieStore.set(key, value, cookieOptions);
 }
 
 export const getCookies = async () => {
     const cookieStore = await cookies();
     const accessToken = cookieStore.get("accessToken")?.value || null;
     const refreshToken = cookieStore.get("refreshToken")?.value || null;
+
+    console.log('[COOKIE] Retrieved cookies:', {
+        hasAccessToken: !!accessToken,
+        hasRefreshToken: !!refreshToken,
+        accessTokenLength: accessToken?.length || 0
+    });
+
     return `accessToken=${accessToken}; refreshToken=${refreshToken}`;
 }
 
