@@ -34,5 +34,7 @@ export const config = {
     "/",
     "/sign-in",
     "/sign-up",
+    "/api/interviews/:path*",
+    "/api/auth/:path*"
   ],
 };
