@@ -61,7 +61,6 @@ const Navbar = ({ user }: NavbarProps) => {
 
           <div className="flex justify-end items-center w-full gap-3">
             {user ? (
-              // Authenticated user - show profile
               <Link href="/profile">
                 <Avatar className="w-10 h-10 hover:ring-2 hover:ring-gray-300 transition-all duration-200 cursor-pointer">
                   <AvatarImage
