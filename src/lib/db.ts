@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import dns from "dns";
 
 let cache = global.mongoose;
 
@@ -10,6 +11,9 @@ if (!cache) {
 }
 
 export const connectDB = async () => {
+
+    process.env.NODE_ENV === "development" && dns.setServers(["8.8.8.8", "8.8.4.4", "1.1.1.1", "1.0.0.1"]); 
+
     if (cache.conn) {
     return cache.conn;
     }
